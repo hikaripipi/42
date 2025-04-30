@@ -6,7 +6,7 @@
 /*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:46:22 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/04/29 21:46:25 by hshinaga         ###   ########.fr       */
+/*   Updated: 2025/04/30 19:42:40 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,16 @@ t_node *create_node(int value)
     new_node->value = value;
     new_node->next = NULL;
     return (new_node);
+}
+
+void free_stack(t_node *stack)
+{
+    t_node *tmp;
+
+    while (stack)
+    {
+        tmp = stack;
+        stack = stack->next;
+        free(tmp);
+    }
 }

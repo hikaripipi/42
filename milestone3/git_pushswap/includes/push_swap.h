@@ -6,7 +6,7 @@
 /*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:29 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/04/29 21:42:37 by hshinaga         ###   ########.fr       */
+/*   Updated: 2025/04/30 19:43:47 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_node
 // 関数プロトタイプ（これから実装する関数のリスト）
 void    error_exit(void);
 t_node  *create_node(int value);
+void free_stack(t_node *stack);
 void    push(t_node **stack_src, t_node **stack_dest);
 void    swap(t_node **stack);
 void    rotate(t_node **stack);
@@ -35,7 +36,16 @@ void    reverse_rotate(t_node **stack);
 
 //operations
 void sa(t_node **a);
-
+void sb(t_node **b);
+void ss(t_node **a, t_node **b);
+void pa(t_node **a, t_node **b);
+void pb(t_node **a, t_node **b);
+void ra(t_node **a);
+void rb(t_node **b);
+void rr(t_node **a, t_node **b);
+void rra(t_node **a);
+void rrb(t_node **b);
+void rrr(t_node **a, t_node **b);
 
 // ソートアルゴリズム
 void    sort_stack(t_node **stack_a, t_node **stack_b);
