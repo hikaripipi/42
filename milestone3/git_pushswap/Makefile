@@ -1,3 +1,6 @@
+LIBFT_DIR = ./libft
+LIBFT = $(LIBFT_DIR)/libft.a
+
 NAME = push_swap
 
 CC = cc
@@ -14,7 +17,8 @@ OBJ = $(SRC:.c=.o)
 INCLUDE = -Iincludes
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	make -C $(LIBFT_DIR)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
@@ -22,6 +26,7 @@ $(NAME): $(OBJ)
 all: $(NAME)
 
 clean:
+	make -C $(LIBFT_DIR) clean
 	rm -f $(OBJ)
 
 fclean: clean
