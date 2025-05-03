@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 21:26:47 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/03 21:34:44 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/03 22:04:57 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void	sort_three(t_node **stack)
 {
-	int a = (*stack)->value;
-	int b = (*stack)->next->value;
-	int c = (*stack)->next->next->value;
+	int	a;
+	int	b;
+	int	c;
 
+	a = (*stack)->value;
+	b = (*stack)->next->value;
+	c = (*stack)->next->next->value;
 	if (a > b && b < c && a < c) // 213
 		sa(stack);
 	else if (a > b && b > c) // 321
