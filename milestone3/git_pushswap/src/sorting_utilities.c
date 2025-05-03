@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 22:16:17 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/04 01:04:41 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/04 01:19:43 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,21 @@ int	find_min_index(t_node *stack)
 		stack = stack->next;
 	}
 	return (index);
+}
+
+void	move_to_top(t_node **stack, int index)
+{
+	int size = stack_size(*stack);
+	int r = size - index;
+
+	if (index < size / 2)
+	{
+		while (index-- > 0)
+			ra(stack);
+	}
+	else
+	{
+		while (r-- > 0)
+			rra(stack);
+	}
 }

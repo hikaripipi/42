@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:29 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/03 21:59:11 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/04 01:25:43 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,24 @@ typedef struct s_node
 }					t_node;
 
 // 関数プロトタイプ（これから実装する関数のリスト）
+
+// error
 void				error_exit(void);
-t_node				*create_node(int value);
-void				free_stack(t_node *stack);
+int					is_valid_integer(char *str);
+void				check_duplicate(t_node *stack);
+
+// ソートアルゴリズム
+void				sort_three(t_node **stack);
+
+// sortユーティリティ関数
+int					find_min_index(t_node *stack);
+void				move_to_top(t_node **stack, int index);
+
+// operations
 void				push(t_node **stack_src, t_node **stack_dest);
 void				swap(t_node **stack);
 void				rotate(t_node **stack);
 void				reverse_rotate(t_node **stack);
-
-// operations
 void				sa(t_node **a);
 void				sb(t_node **b);
 void				ss(t_node **a, t_node **b);
@@ -46,17 +55,9 @@ void				rra(t_node **a);
 void				rrb(t_node **b);
 void				rrr(t_node **a, t_node **b);
 
-// ソートアルゴリズム
-void				sort_stack(t_node **stack_a, t_node **stack_b);
-void				sort_three(t_node **stack);
-
-// ユーティリティ関数
-int					is_sorted(t_node *stack);
+// stackユーティリティ関数
+t_node				*create_node(int value);
+void				free_stack(t_node *stack);
 int					stack_size(t_node *stack);
-int					find_min_index(t_node *stack);
-
-// error
-int					is_valid_integer(char *str);
-void				check_duplicate(t_node *stack);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:43 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/04 01:02:12 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/04 01:26:34 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,9 @@ int	main(int argc, char **argv)
 	check_duplicate(stack_a);
 	print_stack(stack_a, "A");
 	printf("%d\n", find_min_index(stack_a));
-	if (stack_size(stack_a) == 3)
-		sort_three(&stack_a);
+	move_to_top(&stack_a, find_min_index(stack_a));
+	// if (stack_size(stack_a) == 3)
+	// 	sort_three(&stack_a);
 	print_stack(stack_a, "A");
 	free_stack(stack_a);
 	return (0);
