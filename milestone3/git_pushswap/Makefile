@@ -11,6 +11,8 @@ SRC = $(SRC_DIR)/main.c \
       $(SRC_DIR)/error_handling.c \
 	  $(SRC_DIR)/stack_operations.c \
 	  $(SRC_DIR)/stack_utilities.c  \
+	  $(SRC_DIR)/sorting_algorithms.c
+	  
 
 OBJ = $(SRC:.c=.o)
 

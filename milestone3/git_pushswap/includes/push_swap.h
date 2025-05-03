@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:29 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/01 15:15:09 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/03 21:24:58 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void				rrr(t_node **a, t_node **b);
 void				sort_stack(t_node **stack_a, t_node **stack_b);
 
 // ユーティリティ関数
+void				sort_three(t_node **stack);
 int					is_sorted(t_node *stack);
 int					stack_size(t_node *stack);
 
