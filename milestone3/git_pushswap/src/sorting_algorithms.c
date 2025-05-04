@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 21:26:47 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/03 22:04:57 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/05 03:27:00 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,17 @@ void	sort_three(t_node **stack)
 	}
 	else if (a < b && b > c && a > c) // 231
 		rra(stack);
+}
+
+void	sort_five(t_node **stack_a, t_node **stack_b)
+{
+	move_to_top(stack_a, find_min_index(*stack_a));
+	pb(stack_a, stack_b);
+	move_to_top(stack_a, find_min_index(*stack_a));
+	pb(stack_a, stack_b);
+	sort_three(stack_a);
+	if ((*stack_b)->value < (*stack_b)->next->value)
+		sb(stack_b);
+	pa(stack_a, stack_b);
+	pa(stack_a, stack_b);
 }

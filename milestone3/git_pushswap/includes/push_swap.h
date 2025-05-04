@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:29 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/04 01:25:43 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/05 03:17:29 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void				check_duplicate(t_node *stack);
 
 // ソートアルゴリズム
 void				sort_three(t_node **stack);
+void				sort_five(t_node **stack_a, t_node **stack_b);
 
 // sortユーティリティ関数
 int					find_min_index(t_node *stack);
