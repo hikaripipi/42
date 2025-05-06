@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 21:26:47 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/05 03:27:00 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/06 17:47:31 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,17 @@ void	sort_five(t_node **stack_a, t_node **stack_b)
 		sb(stack_b);
 	pa(stack_a, stack_b);
 	pa(stack_a, stack_b);
+}
+
+void	push_chunk(t_node **a, t_node **b, int lower, int upper)
+{
+	int count = stack_size(*a);
+	int index = 0;
+	while (count--)
+	{
+		if (is_in_chunk((*a)->index, lower, upper))
+			pb(a, b);
+		else
+			ra(a);
+	}
 }

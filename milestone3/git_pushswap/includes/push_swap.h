@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:29 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/05 03:17:29 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/06 17:14:18 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef struct s_node
 {
 	int				value;
+	int				index;
 	struct s_node	*next;
 }					t_node;
 
@@ -34,10 +35,15 @@ void				check_duplicate(t_node *stack);
 // ソートアルゴリズム
 void				sort_three(t_node **stack);
 void				sort_five(t_node **stack_a, t_node **stack_b);
+void				push_chunk(t_node **a, t_node **b, int lower, int upper);
 
 // sortユーティリティ関数
 int					find_min_index(t_node *stack);
 void				move_to_top(t_node **stack, int index);
+void				assign_indices(t_node *stack);
+int					get_chunk_threshold(int total_size, int chunk_count,
+						int chunk_index);
+int					is_in_chunk(int index, int lower, int upper);
 
 // operations
 void				push(t_node **stack_src, t_node **stack_dest);

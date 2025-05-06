@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 22:16:17 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/04 01:19:43 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/06 17:12:40 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ int	find_min_index(t_node *stack)
 
 void	move_to_top(t_node **stack, int index)
 {
-	int size = stack_size(*stack);
-	int r = size - index;
+	int	size;
+	int	r;
 
+	size = stack_size(*stack);
+	r = size - index;
 	if (index < size / 2)
 	{
 		while (index-- > 0)
@@ -49,4 +51,44 @@ void	move_to_top(t_node **stack, int index)
 		while (r-- > 0)
 			rra(stack);
 	}
+}
+
+void	assign_indices(t_node *stack)
+{
+	int		index_to_assign;
+	t_node	*current;
+	t_node	*smallest;
+
+	index_to_assign = 0;
+	while (1)
+	{
+		smallest = NULL;
+		current = stack;
+		while (current != NULL)
+		{
+			if (current->index == -1)
+			{
+				if (smallest == NULL || current->value < smallest->value)
+					smallest = current;
+			}
+			current = current->next;
+		}
+		if (smallest == NULL)
+			break ;
+		smallest->index = index_to_assign;
+		index_to_assign++;
+	}
+}
+
+int	get_chunk_threshold(int total_size, int chunk_count, int chunk_index)
+{
+	int	threshold;
+
+	threshold = (total_size * (chunk_index + 1)) / chunk_count - 1;
+	return (threshold);
+}
+
+int	is_in_chunk(int index, int lower, int upper)
+{
+	return (index >= lower && index <= upper);
 }
