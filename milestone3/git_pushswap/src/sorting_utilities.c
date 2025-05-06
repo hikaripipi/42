@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 22:16:17 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/06 17:12:40 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/06 19:37:00 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,54 @@ int	find_min_index(t_node *stack)
 	return (index);
 }
 
-void	move_to_top(t_node **stack, int index)
+int	find_max_index(t_node *stack)
+{
+	int	max_index;
+	int	index;
+	int	count;
+
+	max_index = stack->index;
+	index = 0;
+	count = 0;
+	while (stack)
+	{
+		if (stack->index > max_index)
+		{
+			max_index = stack->index;
+			index = count;
+		}
+		count++;
+		stack = stack->next;
+	}
+	return (index);
+}
+
+void	move_to_top(t_node **stack, int index, char stack_name)
 {
 	int	size;
-	int	r;
+	int	rotate_count;
 
 	size = stack_size(*stack);
-	r = size - index;
+	rotate_count = size - index;
 	if (index < size / 2)
 	{
 		while (index-- > 0)
-			ra(stack);
+		{
+			if (stack_name == 'a')
+				ra(stack);
+			else
+				rb(stack);
+		}
 	}
 	else
 	{
-		while (r-- > 0)
-			rra(stack);
+		while (rotate_count-- > 0)
+		{
+			if (stack_name == 'a')
+				rra(stack);
+			else
+				rrb(stack);
+		}
 	}
 }
 
@@ -91,4 +123,31 @@ int	get_chunk_threshold(int total_size, int chunk_count, int chunk_index)
 int	is_in_chunk(int index, int lower, int upper)
 {
 	return (index >= lower && index <= upper);
+}
+
+int	count_elements_in_chunk(t_node *a, int lower, int upper)
+{
+	int	count;
+
+	count = 0;
+	while (a)
+	{
+		if (is_in_chunk(a->index, lower, upper))
+			count++;
+		a = a->next;
+	}
+	return (count);
+}
+int	get_node_position(t_node *stack, int target_index)
+{
+	int position = 0;
+
+	while (stack)
+	{
+		if (stack->index == target_index)
+			return (position);
+		stack = stack->next;
+		position++;
+	}
+	return (-1); // 万が一見つからない場合
 }

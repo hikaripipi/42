@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:46:22 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/03 21:40:03 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/06 19:27:59 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_node	*create_node(int value)
 	if (!new_node)
 		error_exit();
 	new_node->value = value;
+	new_node->index = -1;
 	new_node->next = NULL;
 	return (new_node);
 }
