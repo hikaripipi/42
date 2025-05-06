@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:29 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/06 19:37:27 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/06 21:44:47 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ int					is_valid_integer(char *str);
 void				check_duplicate(t_node *stack);
 
 // ソートアルゴリズム
+void				sort_two(t_node **stack);
 void				sort_three(t_node **stack);
+void				sort_four(t_node **stack_a, t_node **stack_b);
 void				sort_five(t_node **stack_a, t_node **stack_b);
 void				push_chunk(t_node **a, t_node **b, int lower, int upper);
 void				sort_large(t_node **a, t_node **b, int chunk_count);

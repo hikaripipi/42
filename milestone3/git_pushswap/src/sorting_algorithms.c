@@ -6,11 +6,17 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 21:26:47 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/06 19:20:24 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/06 21:45:24 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	sort_two(t_node **stack)
+{
+	if ((*stack)->value > (*stack)->next->value)
+		sa(stack);
+}
 
 void	sort_three(t_node **stack)
 {
@@ -37,6 +43,13 @@ void	sort_three(t_node **stack)
 	}
 	else if (a < b && b > c && a > c) // 231
 		rra(stack);
+}
+void	sort_four(t_node **stack_a, t_node **stack_b)
+{
+	move_to_top(stack_a, find_min_index(*stack_a), 'a'); // 最小をtopへ
+	pb(stack_a, stack_b);                                // 最小を退避
+	sort_three(stack_a);                                 // 残りをソート
+	pa(stack_a, stack_b);                                // 戻して完成
 }
 
 void	sort_five(t_node **stack_a, t_node **stack_b)

@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:43 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/06 19:37:07 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/06 21:46:14 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int	main(int argc, char **argv)
 
 	stack_a = NULL;
 	stack_b = NULL;
-	size = stack_size(stack_a);
 	if (argc < 2)
 		error_exit();
 	i = 1;
@@ -112,16 +111,21 @@ int	main(int argc, char **argv)
 	}
 	check_duplicate(stack_a);
 	assign_indices(stack_a);
-	print_stack(stack_a, "A");
-	if (size == 3)
+	size = stack_size(stack_a);
+	if (size <= 1)
+		return (0);
+	else if (size == 2)
+		sort_two(&stack_a);
+	else if (size == 3)
 		sort_three(&stack_a);
+	else if (size == 4)
+		sort_four(&stack_a, &stack_b);
 	else if (size == 5)
 		sort_five(&stack_a, &stack_b);
 	else if (size > 5 && size <= 100)
 		sort_large(&stack_a, &stack_b, 5);
 	else
 		sort_large(&stack_a, &stack_b, 10);
-	print_stack(stack_a, "A");
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);
