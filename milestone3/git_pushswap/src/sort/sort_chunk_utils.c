@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 22:16:17 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/10 23:07:38 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/11 01:06:33 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,19 @@ void	move_to_top(t_node **stack, int index, char stack_name)
 				rrb(stack);
 		}
 	}
+}
+
+int	get_position_of_closest_in_chunk(t_node *stack, int lower, int upper)
+{
+	int pos;
+
+	pos = 0;
+	while (stack)
+	{
+		if (stack->index >= lower && stack->index <= upper)
+			return (pos);
+		stack = stack->next;
+		pos++;
+	}
+	return (-1);
 }

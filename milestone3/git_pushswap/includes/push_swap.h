@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:29 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/11 00:27:52 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/11 01:07:38 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void				sort_large(t_node **a, t_node **b, int chunk_count);
 void				push_chunk(t_node **a, t_node **b, int low, int high);
 void				restore_stack(t_node **a, t_node **b);
 void				move_to_top(t_node **stack, int index, char name);
+int					get_position_of_closest_in_chunk(t_node *stack, int lower,
+						int upper);
 
 /* ========== Sort - Index Utilities ========== */
 void				assign_indices(t_node *stack);

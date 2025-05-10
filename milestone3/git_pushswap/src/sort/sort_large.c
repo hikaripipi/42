@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 22:22:17 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/10 22:29:46 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/11 01:03:29 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	push_chunk(t_node **a, t_node **b, int lower, int upper)
 {
 	int	count;
+	int	pos;
 
 	count = count_elements_in_chunk(*a, lower, upper);
 	while (count > 0)
@@ -22,10 +23,18 @@ void	push_chunk(t_node **a, t_node **b, int lower, int upper)
 		if (is_in_chunk((*a)->index, lower, upper))
 		{
 			pb(a, b);
+			if ((*b)->index < lower + (upper - lower) / 2)
+				rb(b);
 			count--;
 		}
 		else
-			ra(a);
+		{
+			pos = get_position_of_closest_in_chunk(*a, lower, upper);
+			if (pos <= stack_size(*a) / 2)
+				ra(a);
+			else
+				rra(a);
+		}
 	}
 }
 
