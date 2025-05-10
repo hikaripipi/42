@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 22:16:17 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/11 01:06:33 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/11 02:23:09 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	move_to_top(t_node **stack, int index, char stack_name)
 
 int	get_position_of_closest_in_chunk(t_node *stack, int lower, int upper)
 {
-	int pos;
+	int	pos;
 
 	pos = 0;
 	while (stack)
