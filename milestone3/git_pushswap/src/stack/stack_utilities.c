@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:46:22 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/06 19:27:59 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/10 23:18:40 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ void	free_stack(t_node *stack)
 
 int	stack_size(t_node *stack)
 {
-	int count = 0;
+	int	count;
 
+	count = 0;
 	while (stack)
 	{
 		count++;

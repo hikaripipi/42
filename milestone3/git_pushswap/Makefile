@@ -6,11 +6,19 @@ INCLUDE = -Iincludes
 
 SRC_DIR = src
 SRC = $(SRC_DIR)/main.c \
-      $(SRC_DIR)/error_handling.c \
-      $(SRC_DIR)/stack_operations.c \
-      $(SRC_DIR)/stack_utilities.c \
-      $(SRC_DIR)/sorting_algorithms.c \
-      $(SRC_DIR)/sorting_utilities.c
+      $(SRC_DIR)/error/error_input_check.c \
+	  $(SRC_DIR)/error/error_conversion.c \
+      $(SRC_DIR)/init/init_stack.c \
+      $(SRC_DIR)/stack/stack_utilities.c \
+      $(SRC_DIR)/sort/sort_small.c \
+      $(SRC_DIR)/sort/sort_large.c \
+      $(SRC_DIR)/sort/sort_chunk_utils.c \
+	  $(SRC_DIR)/sort/sort_index_utils.c \
+      $(SRC_DIR)/operations/core_ops.c \
+      $(SRC_DIR)/operations/op_swap.c \
+      $(SRC_DIR)/operations/op_push.c \
+      $(SRC_DIR)/operations/op_rotate.c \
+      $(SRC_DIR)/operations/op_reverse_rotate.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   op_reverse_rotate.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 21:36:43 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/11 00:04:53 by hikarimac        ###   ########.fr       */
+/*   Created: 2025/05/10 21:55:42 by hikarimac         #+#    #+#             */
+/*   Updated: 2025/05/10 22:17:31 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	rra(t_node **a)
 {
-	t_node	*stack_a;
-	t_node	*stack_b;
-	int		size;
+	reverse_rotate(a);
+	write(1, "rra\n", 4);
+}
 
-	if (argc < 2)
-		return (0);
-	stack_a = NULL;
-	stack_b = NULL;
-	parse_args(argv, &stack_a);
-	check_duplicate(stack_a);
-	assign_indices(stack_a);
-	size = stack_size(stack_a);
-	if (size > 1)
-		sort_dispatch(&stack_a, &stack_b, size);
-	free_stack(stack_a);
-	free_stack(stack_b);
-	return (0);
+void	rrb(t_node **b)
+{
+	reverse_rotate(b);
+	write(1, "rrb\n", 4);
+}
+
+void	rrr(t_node **a, t_node **b)
+{
+	reverse_rotate(a);
+	reverse_rotate(b);
+	write(1, "rrr\n", 4);
 }
