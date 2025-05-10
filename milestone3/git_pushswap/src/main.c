@@ -6,13 +6,13 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:43 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/06 21:46:14 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/10 21:39:56 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "push_swap.h"
 #include <limits.h> // INT_MIN, INT_MAX
+#include <stdio.h>
 
 // スタックの中身を出力する補助関数
 void	print_stack(t_node *stack, char *name)
@@ -112,6 +112,7 @@ int	main(int argc, char **argv)
 	check_duplicate(stack_a);
 	assign_indices(stack_a);
 	size = stack_size(stack_a);
+	print_stack(stack_a, "A");
 	if (size <= 1)
 		return (0);
 	else if (size == 2)
@@ -126,6 +127,7 @@ int	main(int argc, char **argv)
 		sort_large(&stack_a, &stack_b, 5);
 	else
 		sort_large(&stack_a, &stack_b, 10);
+	print_stack(stack_a, "A");
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);

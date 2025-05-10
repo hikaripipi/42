@@ -6,11 +6,10 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:49 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/01 15:13:21 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/10 21:22:07 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "push_swap.h"
 
 void	error_exit(void)
@@ -18,7 +17,10 @@ void	error_exit(void)
 	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
-
+int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
 int	is_valid_integer(char *str)
 {
 	int	i;
@@ -55,4 +57,33 @@ void	check_duplicate(t_node *stack)
 		}
 		current = current->next;
 	}
+}
+
+static int	ft_isspace(char c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\v'
+		|| c == '\f');
+}
+
+long	ft_atol(const char *str)
+{
+	int		sign;
+	long	result;
+
+	sign = 1;
+	result = 0;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + (*str - '0');
+		str++;
+	}
+	return (result * sign);
 }
