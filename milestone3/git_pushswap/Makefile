@@ -9,7 +9,9 @@ SRC = $(SRC_DIR)/main.c \
       $(SRC_DIR)/error/error_input_check.c \
 	$(SRC_DIR)/error/error_conversion.c \
       $(SRC_DIR)/init/init_stack.c \
-      $(SRC_DIR)/stack/stack_utilities.c \
+      $(SRC_DIR)/init/basic_utils.c \
+      $(SRC_DIR)/init/split_utils.c \
+      $(SRC_DIR)/stack/stack_utils.c \
       $(SRC_DIR)/sort/sort_small.c \
       $(SRC_DIR)/sort/sort_large.c \
       $(SRC_DIR)/sort/sort_chunk_utils.c \

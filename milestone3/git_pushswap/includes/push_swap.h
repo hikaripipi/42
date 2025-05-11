@@ -6,7 +6,7 @@
 /*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:29 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/12 00:50:01 by hshinaga         ###   ########.fr       */
+/*   Updated: 2025/05/12 01:32:19 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,18 @@ typedef struct s_node
 	struct s_node	*next;
 }					t_node;
 
+/* ========== Basic - Utilities ========== */
+char				**ft_split(char const *s, char c);
+int					is_sorted(t_node *stack);
+size_t				ft_strlen(const char *str);
+
 /* ========== Init & Stack ========== */
 t_node				*create_node(int value);
 void				append_node(t_node **stack, t_node *new);
 void				parse_args(char **argv, t_node **stack_a);
+void				parse_tokens(char **tokens, t_node **stack_a);
 void				free_stack(t_node *stack);
 int					stack_size(t_node *stack);
-int					is_sorted(t_node *stack);
 
 /* ========== Sort - Dispatch ========== */
 void				sort_dispatch(t_node **a, t_node **b, int size);

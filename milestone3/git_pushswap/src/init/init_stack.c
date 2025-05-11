@@ -6,7 +6,7 @@
 /*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:20:14 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/12 00:45:48 by hshinaga         ###   ########.fr       */
+/*   Updated: 2025/05/12 01:25:39 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,36 +29,53 @@ void	append_node(t_node **stack, t_node *new)
 	current->next = new;
 }
 
+static void	free_strarray(char **arr)
+{
+	size_t i = 0;
+	if (!arr)
+		return;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
+
 void	parse_args(char **argv, t_node **stack_a)
 {
 	int		i;
-	long	tmp_num;
-	int		num;
-	t_node	*new;
+	char	**tokens;
 
 	i = 1;
 	while (argv[i])
 	{
-		if (!is_valid_integer(argv[i]))
+		tokens = ft_split(argv[i], ' ');
+		if (!tokens || !tokens[0])
 			error_exit();
-		tmp_num = ft_atol(argv[i]);
-		if (tmp_num < INT_MIN || tmp_num > INT_MAX)
-			error_exit();
-		num = (int)tmp_num;
-		new = create_node(num);
-		append_node(stack_a, new);
+		parse_tokens(tokens, stack_a);
+		free_strarray(tokens);
 		i++;
 	}
 	check_duplicate(*stack_a);
 }
 
-int	is_sorted(t_node *stack)
+void	parse_tokens(char **tokens, t_node **stack_a)
 {
-	while (stack && stack->next)
+	int		j;
+	long	tmp_num;
+	int		num;
+	t_node	*new;
+
+	j = 0;
+	while (tokens[j])
 	{
-		if (stack->value > stack->next->value)
-			return (0);
-		stack = stack->next;
+		if (!is_valid_integer(tokens[j]))
+			error_exit();
+		tmp_num = ft_atol(tokens[j]);
+		if (tmp_num < INT_MIN || tmp_num > INT_MAX)
+			error_exit();
+		num = (int)tmp_num;
+		new = create_node(num);
+		append_node(stack_a, new);
+		j++;
 	}
-	return (1);
 }
+
