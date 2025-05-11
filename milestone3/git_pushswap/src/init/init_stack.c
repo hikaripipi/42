@@ -6,7 +6,7 @@
 /*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:20:14 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/12 01:25:39 by hshinaga         ###   ########.fr       */
+/*   Updated: 2025/05/12 01:35:51 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ void	append_node(t_node **stack, t_node *new)
 
 static void	free_strarray(char **arr)
 {
-	size_t i = 0;
+	size_t	i;
+
+	i = 0;
 	if (!arr)
-		return;
+		return ;
 	while (arr[i])
 		free(arr[i++]);
 	free(arr);
@@ -78,4 +80,3 @@ void	parse_tokens(char **tokens, t_node **stack_a)
 		j++;
 	}
 }
-
