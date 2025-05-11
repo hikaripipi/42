@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:29 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/11 01:07:38 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/12 00:50:01 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void				append_node(t_node **stack, t_node *new);
 void				parse_args(char **argv, t_node **stack_a);
 void				free_stack(t_node *stack);
 int					stack_size(t_node *stack);
+int					is_sorted(t_node *stack);
 
 /* ========== Sort - Dispatch ========== */
 void				sort_dispatch(t_node **a, t_node **b, int size);

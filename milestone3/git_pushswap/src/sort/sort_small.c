@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_small.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 22:22:20 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/11 01:13:45 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/12 00:49:02 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ void	sort_five(t_node **stack_a, t_node **stack_b)
 
 void	sort_dispatch(t_node **a, t_node **b, int size)
 {
-	if (size <= 1)
-		return ;
-	else if (size == 2)
+	if (size == 2)
 		sort_two(a);
 	else if (size == 3)
 		sort_three(a);

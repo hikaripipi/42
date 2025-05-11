@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:43 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/11 00:04:53 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/12 00:48:50 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	main(int argc, char **argv)
 	check_duplicate(stack_a);
 	assign_indices(stack_a);
 	size = stack_size(stack_a);
+	if (is_sorted(stack_a))
+		return (0);
 	if (size > 1)
 		sort_dispatch(&stack_a, &stack_b, size);
 	free_stack(stack_a);

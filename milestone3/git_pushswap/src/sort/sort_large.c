@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_large.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 22:22:17 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/11 01:03:29 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/05/12 00:45:34 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,3 +70,5 @@ void	sort_large(t_node **a, t_node **b, int chunk_count)
 	}
 	restore_stack(a, b);
 }
+
+
