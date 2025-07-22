@@ -6,6 +6,7 @@
 # include <stdlib.h>    // malloc, free, exit
 # include <unistd.h>    // write, read
 # include <fcntl.h>     // open, close
+# include <libft.h>
 
 /* ========== DEFINES ========== */
 # define TILE_SIZE 32   // 各タイルのピクセルサイズ
