@@ -8,6 +8,18 @@
 # include <fcntl.h>     // open, close
 # include "libft/libft.h"
 
+/* ========== FUNCTION PROTOTYPES ========== */
+// Map parsing functions
+int		open_map_file(char *filename);
+int		read_map_content(int fd, char *buffer, int max_size);
+void	get_map_dimensions(char *buffer, int size, int *width, int *height);
+char	**allocate_map_array(int width, int height);
+void	fill_map_from_buffer(char **map, char *buffer, int size);
+char	**parse_map_file(char *filename, int *width, int *height);
+
+// Utility functions  
+void	free_map_array(char **map, int allocated_rows);
+
 /* ========== DEFINES ========== */
 # define TILE_SIZE 32   // 各タイルのピクセルサイズ
 
