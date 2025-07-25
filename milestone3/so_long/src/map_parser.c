@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 23:02:12 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/24 00:24:47 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/07/25 16:52:03 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,42 @@ void fill_map_from_buffer(char **map, char *buffer, int size)
         map[line_index][letter_count] = '\0';
 }
 
+
+//确认是不是指定的五个字符，不是的话返回-1
+int	ft_isvalid_char(char c)
+{
+	return (c == '0' || c == '1' || c == 'C' || c == 'E' || c == 'P');
+}
+
+//地图必须包含1个出口、至少1个收集品和1个起始位置才有效。如果地图包含重复字符（出口/起始位置），你应该显示错误消息。
+int	ft_isvalid_3comp(char **map, int size)
+{
+    int count_e = 0;
+    int count_c = 0;
+    int count_p = 0;
+    int i = 0;
+
+    while (i < size)
+    {
+        if (*map[i]  == 'E')
+        {
+            count_e++;
+        }
+        else if (*map[i] == 'C')
+        {
+            count_c++;
+        }
+        else if (*map[i]  == 'P')
+        {
+            count_p++;
+        }
+        i++;
+    }
+    return (count_e == 1 && count_c >= 1 && count_p == 1);
+}
+
+
+
 // 6. 主函数（15-20行）
 char **parse_map_file(char *filename, int *width, int *height)
 {
@@ -149,3 +185,4 @@ char **parse_map_file(char *filename, int *width, int *height)
     close(fd);
     return (map);
 }
+

@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 18:45:09 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/24 00:22:02 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/07/25 16:49:51 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int main(int argc, char **argv)
     // 成功メッセージ
     printf("Map loaded successfully!\n");
     printf("Map dimensions: %d x %d\n", game.map.width, game.map.height);
-    
-    // テスト用：マップを表示
-    printf("Map content:\n");
+
+	// テスト用：マップを表示
+	printf("Map content:\n");
     for (int i = 0; i < game.map.height; i++)
     {
         printf("%s\n", game.map.grid[i]);
