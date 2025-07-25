@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 23:02:12 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/25 16:52:03 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/07/25 18:00:01 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,9 +155,32 @@ int	ft_isvalid_3comp(char **map, int size)
     return (count_e == 1 && count_c >= 1 && count_p == 1);
 }
 
+int ft_isvalid_rec(char **map,int *width, int *height)
+{
+    int line_index = 0;
+    int letter_count = 0;
+    if (width == NULL || height != NULL || map != NULL)
+        return (-1);
+    while (line_index < *height)
+    {
+        letter_count = 0;
+        while (map[line_index][letter_count] != '\0')
+        {
+            letter_count++;
+        }
+        if (*width != letter_count)
+            return (-1);
+        line_index++;
+    }
+    return (0);
+}
 
+// int isvalid(char **map)
+// {
+    
+// }
 
-// 6. 主函数（15-20行）
+// 6. 解析文件函数 把地图变成二维数组
 char **parse_map_file(char *filename, int *width, int *height)
 {
     int fd;
