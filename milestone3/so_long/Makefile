@@ -6,13 +6,13 @@
 #    By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/22 18:44:08 by hikarimac         #+#    #+#              #
-#    Updated: 2025/07/25 18:14:15 by hikarimac        ###   ########.fr        #
+#    Updated: 2025/07/26 22:02:29 by hikarimac        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SOURCES = src/main.c src/map_parser.c src/game.c src/utils.c
+SOURCES = src/main.c src/map_parser.c src/map_file_io.c src/map_validation.c src/map_pathfinding.c src/map_utils.c src/game.c src/utils.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -21,21 +21,39 @@ CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
+# ft_printfの設定
+PRINTF_DIR = printf
+PRINTF = $(PRINTF_DIR)/libftprintf.a
+
+# MiniLibXの設定
+MLX_DIR = mlx
+MLX = $(MLX_DIR)/libmlx.a
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+
 all: $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
-$(NAME): $(LIBFT) $(SOURCES)
-	$(CC) $(CFLAGS) $(SOURCES) -L$(LIBFT_DIR) -lft -o $(NAME)
+$(PRINTF):
+	make -C $(PRINTF_DIR)
+
+$(MLX):
+	make -C $(MLX_DIR)
+
+$(NAME): $(LIBFT) $(PRINTF) $(MLX) $(SOURCES)
+	$(CC) $(CFLAGS) $(SOURCES) -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lftprintf $(MLX_FLAGS) -o $(NAME)
 
 clean:
 	rm -f *.o
 	make -C $(LIBFT_DIR) clean
+	make -C $(PRINTF_DIR) clean
+	make -C $(MLX_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
 	make -C $(LIBFT_DIR) fclean
+	make -C $(PRINTF_DIR) fclean
 
 re: fclean all
 
