@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 18:45:09 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/25 16:49:51 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/07/25 22:17:11 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int main(int argc, char **argv)
         printf("Error: Failed to parse map file\n");
         return (1);
     }
-    
-    // 成功メッセージ
+
+
+
+	// 成功メッセージ
     printf("Map loaded successfully!\n");
     printf("Map dimensions: %d x %d\n", game.map.width, game.map.height);
 
@@ -44,6 +46,7 @@ int main(int argc, char **argv)
         printf("%s\n", game.map.grid[i]);
     }
     
+	ft_isvalid(game.map.grid, game.map.width, game.map.height);
     // メモリを解放
     free_map_array(game.map.grid, game.map.height);
     

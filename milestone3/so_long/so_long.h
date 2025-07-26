@@ -16,6 +16,7 @@ void	get_map_dimensions(char *buffer, int size, int *width, int *height);
 char	**allocate_map_array(int width, int height);
 void	fill_map_from_buffer(char **map, char *buffer, int size);
 char	**parse_map_file(char *filename, int *width, int *height);
+int ft_isvalid(char **map, int width, int height);
 
 // Utility functions  
 void	free_map_array(char **map, int allocated_rows);
