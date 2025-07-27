@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 18:45:09 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/26 22:20:46 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/07/26 23:52:09 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int argc, char **argv)
 		ft_printf("%s\n", game.map.grid[i]);
 	}
 	ft_isvalid(game.map.grid, game.map.width, game.map.height);
+	//-----------------------------------
 	game.mlx = mlx_init();
 	if (!game.mlx)
 	{
@@ -56,9 +57,22 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_printf("Window created successfully! Starting game loop...\n");
+	// 画像を初期化
+	if (!init_game_images(&game))
+	{
+		ft_printf("Error: Failed to initialize game images\n");
+		free_map_array(game.map.grid, game.map.height);
+		return (1);
+	}
+	// 初回描画
+	render_game(&game);
+	// イベントハンドラを設定
+	mlx_key_hook(game.win, handle_keypress, &game);
+	mlx_hook(game.win, 17, 0, close_game, &game); // ウィンドウクローズイベント
 	// ゲームループを開始（これが重要！）
 	mlx_loop(game.mlx);
 	// メモリを解放（通常ここには到達しない）
+	//----------------------------------
 	free_map_array(game.map.grid, game.map.height);
 	return (0);
 }

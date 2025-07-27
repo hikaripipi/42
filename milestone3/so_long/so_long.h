@@ -47,37 +47,54 @@ void	free_map_array(char **map, int allocated_rows);
 int		ft_check_all_chars(char **map, int width, int height);
 void	ft_count_components(char **map, int width, int height, int *counts);
 
-/* ========== DEFINES ========== */
-# define TILE_SIZE 32 // 各タイルのピクセルサイズ
+/* ========== 定义 ========== */
+# define TILE_SIZE 32 // 每个瓦片的像素大小
+# define SPRITE_SIZE 16 // 精灵表中每个瓦片的大小
 
-/* ========== MAP CHARACTERS ========== */
-# define EMPTY '0' // 空きスペース
-# define WALL '1' // 壁
-# define COLLECTIBLE 'C' // コレクタブル
+/* ========== 地图字符 ========== */
+# define EMPTY '0' // 空地
+# define WALL '1' // 墙壁
+# define COLLECTIBLE 'C' // 收集品
 # define EXIT 'E' // 出口
-# define PLAYER 'P' // プレイヤー開始位置
+# define PLAYER 'P' // 玩家起始位置
 
-/* ========== STRUCTURES ========== */
-// まず最小構成から始める
+/* ========== 结构体 ========== */
+// 瓦片图像数据
+typedef struct s_tiles
+{
+	void *wall_img;        // 墙壁瓦片
+	void *empty_img;       // 空地瓦片
+	void *collectible_img; // 收集品瓦片
+	void *exit_img;        // 出口瓦片
+	void *player_img;      // 玩家瓦片
+}		t_tiles;
+
+// 地图结构体
 typedef struct s_map
 {
-	char **grid;      // マップの2次元配列
-	int width;        // マップの幅
-	int height;       // マップの高さ
-	int collectibles; // コレクタブルの数
-	int player_x;     // プレイヤーのX座標
-	int player_y;     // プレイヤーのY座標
+	char **grid;      // 地图的二维数组
+	int width;        // 地图宽度
+	int height;       // 地图高度
+	int collectibles; // 收集品数量
+	int player_x;     // 玩家X坐标
+	int player_y;     // 玩家Y坐标
 }		t_map;
 
 typedef struct s_game
 {
-	void *mlx; // MLXポインタ
-	void *win; // ウィンドウポインタ
-	t_map map; // マップデータ
-	int moves; // 移動回数
+	void *mlx;     // MLX指针
+	void *win;     // 窗口指针
+	t_map map;     // 地图数据
+	t_tiles tiles; // 瓦片图像数据
+	int moves;     // 移动次数
 }		t_game;
 
-/* ========== FUNCTION PROTOTYPES ========== */
-// 今はまだ空でOK、後で関数を作ったら追加していく
+/* ========== 函数原型 ========== */
+// game.c - 游戏相关功能
+int		init_game_images(t_game *game);
+void	render_game(t_game *game);
+void	cleanup_game(t_game *game);
+int		handle_keypress(int keycode, t_game *game);
+int		close_game(t_game *game);
 
 #endif
