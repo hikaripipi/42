@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 17:11:42 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/28 17:30:33 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/07/28 18:37:31 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,13 @@ static int	load_and_validate_map(char *filename, t_game *game)
 	}
 	ft_printf("Map loaded successfully!\n");
 	ft_printf("Map dimensions: %d x %d\n", game->map.width, game->map.height);
-	ft_isvalid(game->map.grid, game->map.width, game->map.height);
+	if (!ft_validate_complete_map(game->map.grid, game->map.width,
+			game->map.height))
+	{
+		ft_printf("Error: Map validation failed\n");
+		free_map_array(game->map.grid, game->map.height);
+		return (0);
+	}
 	ft_find_player(game->map.grid, game->map.width, game->map.height,
 		player_pos);
 	game->map.player_x = player_pos[0];

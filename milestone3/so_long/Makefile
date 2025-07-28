@@ -6,13 +6,13 @@
 #    By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/22 18:44:08 by hikarimac         #+#    #+#              #
-#    Updated: 2025/07/28 17:33:14 by hikarimac        ###   ########.fr        #
+#    Updated: 2025/07/28 18:35:26 by hikarimac        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-SOURCES = src/main.c src/map_parser.c src/map_file_io.c src/map_validation.c src/map_pathfinding.c src/map_utils.c src/game.c src/player_movement.c src/player_controls.c src/game_events.c src/utils.c
+SOURCES = src/main.c src/map_parser.c src/map_file_io.c src/map_validation.c src/map_pathfinding.c src/map_utils.c src/game.c src/game_render.c src/player_movement.c src/player_controls.c src/game_events.c src/utils.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 17:15:00 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/28 17:39:52 by hikarimac        ###   ########.fr       */
+/*   Created: 2025/07/28 18:38:26 by hikarimac         #+#    #+#             */
+/*   Updated: 2025/07/28 18:38:32 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ static void	handle_exit(t_game *game)
 static void	update_player_position(t_game *game, int new_x, int new_y,
 		char target)
 {
-	if (game->map.grid[game->map.player_y][game->map.player_x] != EXIT)
+	char	old_tile;
+
+	old_tile = game->map.grid[game->map.player_y][game->map.player_x];
+	if (old_tile == PLAYER)
 		game->map.grid[game->map.player_y][game->map.player_x] = EMPTY;
 	game->map.player_x = new_x;
 	game->map.player_y = new_y;
