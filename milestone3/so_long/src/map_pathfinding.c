@@ -6,15 +6,13 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 20:30:00 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/26 23:08:48 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/07/28 17:29:50 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-// 找到玩家位置
-void	ft_find_player(char **map, int width, int height, int *player_x,
-		int *player_y)
+void	ft_find_player(char **map, int width, int height, int *player_pos)
 {
 	int	i;
 	int	j;
@@ -28,8 +26,8 @@ void	ft_find_player(char **map, int width, int height, int *player_x,
 		{
 			if (map[i][j] == 'P')
 			{
-				*player_x = j;
-				*player_y = i;
+				player_pos[0] = j;
+				player_pos[1] = i;
 				return ;
 			}
 			j++;
@@ -38,7 +36,6 @@ void	ft_find_player(char **map, int width, int height, int *player_x,
 	}
 }
 
-// 创建访问数组
 int	**ft_create_visited(int width, int height)
 {
 	int	**visited;
@@ -60,7 +57,6 @@ int	**ft_create_visited(int width, int height)
 	return (visited);
 }
 
-// 释放访问数组
 void	ft_free_visited(int **visited, int height)
 {
 	int	i;
@@ -76,29 +72,27 @@ void	ft_free_visited(int **visited, int height)
 	free(visited);
 }
 
-// 洪水填充递归函数
-void	ft_flood_fill(char **map, int **visited, int x, int y, int width,
-		int height)
+void	ft_flood_fill(char **map, int **visited, t_flood_params params)
 {
-	// 边界检查：超出地图范围
-	if (x < 0 || x >= width || y < 0 || y >= height)
+	if (params.x < 0 || params.x >= params.width || params.y < 0
+		|| params.y >= params.height)
 		return ;
-	// 如果已经访问过
-	if (visited[y][x] == 1)
+	if (visited[params.y][params.x] == 1)
 		return ;
-	// 如果是墙壁，不能通过
-	if (map[y][x] == '1')
+	if (map[params.y][params.x] == '1')
 		return ;
-	// 标记为已访问
-	visited[y][x] = 1;
-	// 递归访问四个方向
-	ft_flood_fill(map, visited, x + 1, y, width, height);
-	ft_flood_fill(map, visited, x - 1, y, width, height);
-	ft_flood_fill(map, visited, x, y + 1, width, height);
-	ft_flood_fill(map, visited, x, y - 1, width, height);
+	visited[params.y][params.x] = 1;
+	params.x++;
+	ft_flood_fill(map, visited, params);
+	params.x -= 2;
+	ft_flood_fill(map, visited, params);
+	params.x++;
+	params.y++;
+	ft_flood_fill(map, visited, params);
+	params.y -= 2;
+	ft_flood_fill(map, visited, params);
 }
 
-// 检查所有收集品和出口是否可达
 int	ft_check_reachable(char **map, int **visited, int width, int height)
 {
 	int	i;
@@ -111,10 +105,10 @@ int	ft_check_reachable(char **map, int **visited, int width, int height)
 		j = 0;
 		while (j < width)
 		{
-			// 如果是C或E，但没有被访问到
 			if ((map[i][j] == 'C' || map[i][j] == 'E') && visited[i][j] != 1)
 			{
-				ft_printf("无法到达的位置: (%d, %d) = '%c'\n", j, i, map[i][j]);
+				ft_printf("Unreachable position: (%d, %d) = '%c'\n", j, i,
+					map[i][j]);
 				return (0);
 			}
 			j++;

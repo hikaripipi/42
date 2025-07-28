@@ -5,14 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/26 23:08:27 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/26 23:08:36 by hikarimac        ###   ########.fr       */
+/*   Created: 2025/07/28 17:37:58 by hikarimac         #+#    #+#             */
+/*   Updated: 2025/07/28 17:39:05 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-// 1. 打开文件
 int	open_map_file(char *filename)
 {
 	int	fd;
@@ -27,7 +26,6 @@ int	open_map_file(char *filename)
 	return (fd);
 }
 
-// 2. 读取内容
 int	read_map_content(int fd, char *buffer, int max_size)
 {
 	int	bytes_read;
@@ -42,7 +40,6 @@ int	read_map_content(int fd, char *buffer, int max_size)
 	return (bytes_read);
 }
 
-// 3. 统计尺寸
 void	get_map_dimensions(char *buffer, int size, int *width, int *height)
 {
 	int	i;
@@ -64,54 +61,51 @@ void	get_map_dimensions(char *buffer, int size, int *width, int *height)
 	}
 }
 
-// 4. 分配内存
 char	**allocate_map_array(int width, int height)
 {
 	char	**map;
-	int		j;
+	int		i;
 
-	map = ft_calloc(height, sizeof(char *));
+	map = (char **)ft_calloc(height, sizeof(char *));
 	if (!map)
 		return (NULL);
-	j = 0;
-	while (j < height)
+	i = 0;
+	while (i < height)
 	{
-		map[j] = ft_calloc((width + 1), sizeof(char));
-		if (!map[j])
+		map[i] = (char *)ft_calloc(width + 1, sizeof(char));
+		if (!map[i])
 		{
-			free_map_array(map, j);
+			cleanup_partial_allocation(map, i);
 			return (NULL);
 		}
-		j++;
+		i++;
 	}
 	return (map);
 }
 
-// 5. 填充数据
 void	fill_map_from_buffer(char **map, char *buffer, int size)
 {
-	int i;
-	int line_index;
-	int letter_count;
+	int	i;
+	int	row;
+	int	col;
 
 	i = 0;
-	line_index = 0;
-	letter_count = 0;
+	row = 0;
+	col = 0;
 	while (i < size)
 	{
-		if (buffer[i] != '\n')
+		if (buffer[i] == '\n')
 		{
-			map[line_index][letter_count] = buffer[i];
-			letter_count++;
+			map[row][col] = '\0';
+			row++;
+			col = 0;
 		}
 		else
 		{
-			map[line_index][letter_count] = '\0';
-			line_index++;
-			letter_count = 0;
+			map[row][col] = buffer[i];
+			col++;
 		}
 		i++;
 	}
-	if (letter_count > 0)
-		map[line_index][letter_count] = '\0';
+	map[row][col] = '\0';
 }

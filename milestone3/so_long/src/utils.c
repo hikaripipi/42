@@ -6,13 +6,13 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 00:01:07 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/26 23:09:12 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/07/28 17:25:05 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-// 检查地图中所有字符是否有效
+/* Check if all characters in the map are valid game elements */
 int	ft_check_all_chars(char **map, int width, int height)
 {
 	int	i;
@@ -26,7 +26,7 @@ int	ft_check_all_chars(char **map, int width, int height)
 		{
 			if (!ft_isvalid_char(map[i][j]))
 			{
-				ft_printf("错误：发现无效字符 '%c'\n", map[i][j]);
+				ft_printf("Error: Invalid character '%c' found\n", map[i][j]);
 				return (0);
 			}
 			j++;
@@ -36,7 +36,7 @@ int	ft_check_all_chars(char **map, int width, int height)
 	return (1);
 }
 
-// 计算地图中各组件的数量
+/* Count the number of exits, collectibles, and players in the map */
 void	ft_count_components(char **map, int width, int height, int *counts)
 {
 	int	i;

@@ -6,60 +6,55 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 23:02:12 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/26 23:08:43 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/07/28 17:30:42 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-// 路径有效性检查（使用洪水填充算法）
 int	ft_isvalid_pass(char **map, int width, int height)
 {
-	int	**visited;
-	int	result;
+	int				**visited;
+	int				result;
+	int				player_pos[2];
+	t_flood_params	params;
 
-	int player_x, player_y;
-	// 创建visited数组
 	visited = ft_create_visited(width, height);
 	if (!visited)
 		return (0);
-	// 找到玩家位置
-	ft_find_player(map, width, height, &player_x, &player_y);
-	ft_printf("玩家位置: (%d, %d)\n", player_x, player_y);
-	// 从玩家位置开始洪水填充
-	ft_flood_fill(map, visited, player_x, player_y, width, height);
-	// 检查所有C和E是否可达
+	ft_find_player(map, width, height, player_pos);
+	ft_printf("Player position: (%d, %d)\n", player_pos[0], player_pos[1]);
+	params.x = player_pos[0];
+	params.y = player_pos[1];
+	params.width = width;
+	params.height = height;
+	ft_flood_fill(map, visited, params);
 	result = ft_check_reachable(map, visited, width, height);
-	// 释放内存
 	ft_free_visited(visited, height);
 	if (result)
-		ft_printf("所有位置都可达！\n");
+		ft_printf("All positions are reachable!\n");
 	else
-		ft_printf("有位置无法到达！\n");
+		ft_printf("Some positions are unreachable!\n");
 	return (result);
 }
 
-// 完整地图验证（包含基本验证和路径验证）
 int	ft_validate_complete_map(char **map, int width, int height)
 {
-	ft_printf("=== 开始完整地图验证 ===\n");
-	// 先进行基本验证
+	ft_printf("=== Starting complete map validation ===\n");
 	if (!ft_isvalid(map, width, height))
 	{
-		ft_printf("错误：基本验证失败\n");
+		ft_printf("Error: Basic validation failed\n");
 		return (0);
 	}
-	// 然后进行路径验证
 	if (!ft_isvalid_pass(map, width, height))
 	{
-		ft_printf("错误：路径验证失败\n");
+		ft_printf("Error: Path validation failed\n");
 		return (0);
 	}
-	ft_printf("=== 地图验证完全成功 ===\n");
+	ft_printf("=== Map validation completely successful ===\n");
 	return (1);
 }
 
-// 6. 解析文件函数 把地图变成二维数组
 char	**parse_map_file(char *filename, int *width, int *height)
 {
 	int		fd;
