@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 18:45:09 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/26 23:52:09 by hikarimac        ###   ########.fr       */
+/*   Created: 2025/07/28 17:11:42 by hikarimac         #+#    #+#             */
+/*   Updated: 2025/07/28 17:12:01 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ int	main(int argc, char **argv)
 		ft_printf("%s\n", game.map.grid[i]);
 	}
 	ft_isvalid(game.map.grid, game.map.width, game.map.height);
+	// 初始化玩家位置
+	ft_find_player(game.map.grid, game.map.width, game.map.height,
+		&game.map.player_x, &game.map.player_y);
+	ft_printf("玩家初始位置: (%d, %d)\n", game.map.player_x, game.map.player_y);
+	// 初始化游戏数据
+	game.moves = 0;
 	//-----------------------------------
 	game.mlx = mlx_init();
 	if (!game.mlx)
@@ -64,14 +70,14 @@ int	main(int argc, char **argv)
 		free_map_array(game.map.grid, game.map.height);
 		return (1);
 	}
-	// 初回描画
+	// 初始渲染游戏画面
 	render_game(&game);
-	// イベントハンドラを設定
-	mlx_key_hook(game.win, handle_keypress, &game);
-	mlx_hook(game.win, 17, 0, close_game, &game); // ウィンドウクローズイベント
-	// ゲームループを開始（これが重要！）
+	// 设置事件处理函数
+	mlx_hook(game.win, 2, 1L << 0, handle_keypress, &game); // 只监听按键按下事件
+	mlx_hook(game.win, 17, 0, close_game, &game);           // 处理窗口关闭事件
+	// 启动游戏主循环（这很重要！）
 	mlx_loop(game.mlx);
-	// メモリを解放（通常ここには到達しない）
+	// 释放内存（通常不会执行到这里）
 	//----------------------------------
 	free_map_array(game.map.grid, game.map.height);
 	return (0);
