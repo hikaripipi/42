@@ -6,7 +6,7 @@
 #    By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/22 18:44:08 by hikarimac         #+#    #+#              #
-#    Updated: 2025/07/29 18:49:07 by hikarimac        ###   ########.fr        #
+#    Updated: 2025/07/29 19:08:17 by hikarimac        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,16 +27,6 @@ PRINTF = $(PRINTF_DIR)/libftprintf.a
 
 # MiniLibXの設定
 MLX_DIR = include/mlx
-
-# OS自動検出
-UNAME := $(shell uname)
-ifeq ($(UNAME), Darwin)
-	# macOS
-	MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
-else
-	# Linux
-	MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
-endif
 
 MLX = $(MLX_DIR)/libmlx.a
 
