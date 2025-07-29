@@ -2,9 +2,9 @@
 # define SO_LONG_H
 
 /* ========== INCLUDES ========== */
-# include "libft/libft.h"
-# include "mlx/mlx.h"
-# include "printf/ft_printf.h"
+# include "include/ft_printf/ft_printf.h"
+# include "include/libft/libft.h"
+# include "include/mlx/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>

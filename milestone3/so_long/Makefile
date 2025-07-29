@@ -6,7 +6,7 @@
 #    By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/22 18:44:08 by hikarimac         #+#    #+#              #
-#    Updated: 2025/07/29 17:42:39 by hikarimac        ###   ########.fr        #
+#    Updated: 2025/07/29 18:49:07 by hikarimac        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,15 +18,15 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 # libftの設定
-LIBFT_DIR = libft
+LIBFT_DIR = include/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # ft_printfの設定
-PRINTF_DIR = printf
+PRINTF_DIR = include/ft_printf
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
 # MiniLibXの設定
-MLX_DIR = mlx
+MLX_DIR = include/mlx
 
 # OS自動検出
 UNAME := $(shell uname)
