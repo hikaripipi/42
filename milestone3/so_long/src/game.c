@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/26 23:08:16 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/28 18:37:25 by hikarimac        ###   ########.fr       */
+/*   Created: 2025/07/29 17:39:44 by hikarimac         #+#    #+#             */
+/*   Updated: 2025/07/29 17:39:48 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	cleanup_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->tiles.exit_img);
 	if (game->tiles.player_img)
 		mlx_destroy_image(game->mlx, game->tiles.player_img);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
 	if (game->map.grid)
 		free_map_array(game->map.grid, game->map.height);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 17:11:42 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/28 18:37:31 by hikarimac        ###   ########.fr       */
+/*   Created: 2025/07/29 17:39:52 by hikarimac         #+#    #+#             */
+/*   Updated: 2025/07/29 17:40:02 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,16 +83,16 @@ int	main(int argc, char **argv)
 	game.moves = 0;
 	if (!init_mlx_window(&game))
 	{
-		free_map_array(game.map.grid, game.map.height);
+		cleanup_game(&game);
 		return (1);
 	}
 	if (!init_game_images(&game))
 	{
 		ft_printf("Error: Failed to initialize game images\n");
-		free_map_array(game.map.grid, game.map.height);
+		cleanup_game(&game);
 		return (1);
 	}
 	start_game_loop(&game);
-	free_map_array(game.map.grid, game.map.height);
+	cleanup_game(&game);
 	return (0);
 }
