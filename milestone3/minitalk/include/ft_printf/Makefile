@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+         #
+#    By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/05 22:58:31 by hshinaga          #+#    #+#              #
-#    Updated: 2025/01/06 01:03:52 by hshinaga         ###   ########.fr        #
+#    Updated: 2025/07/29 19:30:40 by hikarimac        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = libft_printf.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs

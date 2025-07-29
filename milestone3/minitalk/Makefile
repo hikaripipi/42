@@ -6,7 +6,7 @@
 #    By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/29 19:04:38 by hikarimac         #+#    #+#              #
-#    Updated: 2025/07/29 19:08:03 by hikarimac        ###   ########.fr        #
+#    Updated: 2025/07/29 19:52:27 by hikarimac        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,18 +25,6 @@ LIBFT = $(LIBFT_DIR)/libft.a
 PRINTF_DIR = include/ft_printf
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
-# OS自動検出
-UNAME := $(shell uname)
-ifeq ($(UNAME), Darwin)
-	# macOS
-	MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
-else
-	# Linux
-	MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
-endif
-
-MLX = $(MLX_DIR)/libmlx.a
-
 all: $(NAME)
 
 $(LIBFT):
@@ -45,17 +33,13 @@ $(LIBFT):
 $(PRINTF):
 	make -C $(PRINTF_DIR)
 
-$(MLX):
-	make -C $(MLX_DIR)
-
-$(NAME): $(LIBFT) $(PRINTF) $(MLX) $(SOURCES)
-	$(CC) $(CFLAGS) $(SOURCES) -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lftprintf $(MLX_FLAGS) -o $(NAME)
+$(NAME): $(LIBFT) $(PRINTF) $(SOURCES)
+	$(CC) $(CFLAGS) $(SOURCES) -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lft_printf -o $(NAME)
 
 clean:
 	rm -f *.o
 	make -C $(LIBFT_DIR) clean
 	make -C $(PRINTF_DIR) clean
-	make -C $(MLX_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
