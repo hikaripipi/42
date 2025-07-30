@@ -6,13 +6,17 @@
 #    By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/29 19:04:38 by hikarimac         #+#    #+#              #
-#    Updated: 2025/07/29 19:52:27 by hikarimac        ###   ########.fr        #
+#    Updated: 2025/07/30 17:54:31 by hikarimac        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minitalk
 
-SOURCES = src/server.c
+SERVER_NAME = server
+CLIENT_NAME = client
+
+SERVER = src/server.c
+CLIENT = src/client.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -25,7 +29,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 PRINTF_DIR = include/ft_printf
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
-all: $(NAME)
+all: $(SERVER_NAME) $(CLIENT_NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
@@ -33,8 +37,11 @@ $(LIBFT):
 $(PRINTF):
 	make -C $(PRINTF_DIR)
 
-$(NAME): $(LIBFT) $(PRINTF) $(SOURCES)
-	$(CC) $(CFLAGS) $(SOURCES) -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lft_printf -o $(NAME)
+$(SERVER_NAME): $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) $(SERVER) -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lft_printf -o $(SERVER_NAME)
+
+$(CLIENT_NAME): $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) $(CLIENT) -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lft_printf -o $(CLIENT_NAME)
 
 clean:
 	rm -f *.o
