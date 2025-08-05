@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 07:34:18 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/29 19:35:36 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/02 19:39:36 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 // void	ft_putstr(const char *s);
 // int		ft_atoi(const char *str);
 // int		ft_strlen(const char *str);
+void	print_timestamp(void);
 
 // // ===== クライアント側 =====
 // void	send_char(pid_t server_pid, char c);

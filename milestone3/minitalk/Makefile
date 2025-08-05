@@ -6,7 +6,7 @@
 #    By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/29 19:04:38 by hikarimac         #+#    #+#              #
-#    Updated: 2025/07/30 17:54:31 by hikarimac        ###   ########.fr        #
+#    Updated: 2025/08/05 14:45:04 by hikarimac        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME = minitalk
 SERVER_NAME = server
 CLIENT_NAME = client
 
-SERVER = src/server.c
-CLIENT = src/client.c
+SERVER = src/server.c src/utils.c
+CLIENT = src/client.c src/utils.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

@@ -6,11 +6,12 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:56:54 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/08/02 02:15:38 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/05 14:45:04 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
+#include <time.h>
 
 static char	current_char = 0;
 static int	bit_count = 0;
@@ -28,7 +29,8 @@ void	handler1(int sig)
 		char_count++;
 		if (current_char == '\0')
 		{
-			ft_printf("Received: %s\n", message);
+			print_timestamp();
+			ft_printf("Server: Received: %s\n", message);
 			char_count = 0;
 		}
 		current_char = 0;
@@ -47,7 +49,8 @@ void	handler2(int sig)
 		char_count++;
 		if (current_char == '\0')
 		{
-			ft_printf("Received: %s\n", message);
+			print_timestamp();
+			ft_printf("Server: Received: %s\n", message);
 			char_count = 0;
 		}
 		current_char = 0;

@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 18:56:57 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/08/02 19:15:17 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/05 14:45:04 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	main(int argc, char **argv)
 		ft_printf("Error: %s need correct input\n", argv[0]);
 		return (1);
 	}
+	print_timestamp();
+	ft_printf("Client: Sending message: %s\n", argv[2]);
 	send_massage(ft_atoi(argv[1]), argv[2]);
 	// kill(ft_atoi(argv[1]), SIGUSR1);
 	return (0);
