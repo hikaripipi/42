@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/29 18:56:57 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/08/05 14:55:35 by hikarimac        ###   ########.fr       */
+/*   Created: 2025/08/07 02:01:50 by hikarimac         #+#    #+#             */
+/*   Updated: 2025/08/07 18:04:06 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,32 @@ char	*char_to_binary(char c)
 	return (binary);
 }
 
+void	send_signal_with_check(int pid, int signal, char *bmassage)
+{
+	if (kill(pid, signal) == -1)
+	{
+		ft_printf("Error: Failed to send signal to PID %d\n", pid);
+		free(bmassage);
+		exit(1);
+	}
+}
+
 void	send_char(char c, int pid)
 {
 	char	*bmassage;
 	int		count;
 
 	bmassage = char_to_binary(c);
+	if (!bmassage)
+		exit(1);
 	count = 0;
 	while (count < 8)
 	{
 		if (bmassage[count] == '0')
-			kill(pid, SIGUSR1);
+			send_signal_with_check(pid, SIGUSR1, bmassage);
 		else
-			kill(pid, SIGUSR2);
-		usleep(1000);
+			send_signal_with_check(pid, SIGUSR2, bmassage);
+		usleep(60);
 		count++;
 	}
 	free(bmassage);
@@ -62,19 +74,26 @@ void	send_massage(int pid, char *massage)
 		send_char(massage[i], pid);
 		i++;
 	}
-	send_char('\0', pid); // null終端文字も同じ関数で！
+	send_char('\0', pid);
 }
 
 int	main(int argc, char **argv)
 {
+	int	server_pid;
+
 	if (argc != 3)
 	{
-		ft_printf("Error: %s need correct input\n", argv[0]);
+		ft_printf("Usage: %s <server_pid> <message>\n", argv[0]);
+		return (1);
+	}
+	server_pid = ft_atoi(argv[1]);
+	if (server_pid <= 0)
+	{
+		ft_printf("Error: Invalid PID\n");
 		return (1);
 	}
 	print_timestamp();
 	ft_printf("Client: Sending message: %s\n", argv[2]);
-	send_massage(ft_atoi(argv[1]), argv[2]);
-	// kill(ft_atoi(argv[1]), SIGUSR1);
+	send_massage(server_pid, argv[2]);
 	return (0);
 }

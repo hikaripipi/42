@@ -5,63 +5,78 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/29 18:56:54 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/08/05 14:55:35 by hikarimac        ###   ########.fr       */
+/*   Created: 2025/08/07 02:01:28 by hikarimac         #+#    #+#             */
+/*   Updated: 2025/08/07 18:00:53 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
-#include <time.h>
 
-static char	current_char = 0;
-static int	bit_count = 0;
-static char	message[1000];
-static int	char_count = 0;
+static t_server_data	g_server;
 
 void	handler1(int sig)
 {
 	(void)sig;
-	current_char = current_char << 1;
-	bit_count++;
-	if (bit_count == 8)
+	g_server.current_char = g_server.current_char << 1;
+	g_server.bit_count++;
+	if (g_server.bit_count == 8)
 	{
-		message[char_count] = current_char;
-		char_count++;
-		if (current_char == '\0')
+		if (g_server.char_count < 999)
+		{
+			g_server.message[g_server.char_count] = g_server.current_char;
+			g_server.char_count++;
+		}
+		if (g_server.current_char == '\0')
 		{
 			print_timestamp();
-			ft_printf("Server: Received: %s\n", message);
-			char_count = 0;
+			ft_printf("Server: Received: %s\n", g_server.message);
+			g_server.char_count = 0;
 		}
-		current_char = 0;
-		bit_count = 0;
+		g_server.current_char = 0;
+		g_server.bit_count = 0;
 	}
 }
 
 void	handler2(int sig)
 {
 	(void)sig;
-	current_char = (current_char << 1) | 1;
-	bit_count++;
-	if (bit_count == 8)
+	g_server.current_char = (g_server.current_char << 1) | 1;
+	g_server.bit_count++;
+	if (g_server.bit_count == 8)
 	{
-		message[char_count] = current_char;
-		char_count++;
-		if (current_char == '\0')
+		if (g_server.char_count < 999)
+		{
+			g_server.message[g_server.char_count] = g_server.current_char;
+			g_server.char_count++;
+		}
+		if (g_server.current_char == '\0')
 		{
 			print_timestamp();
-			ft_printf("Server: Received: %s\n", message);
-			char_count = 0;
+			ft_printf("Server: Received: %s\n", g_server.message);
+			g_server.char_count = 0;
 		}
-		current_char = 0;
-		bit_count = 0;
+		g_server.current_char = 0;
+		g_server.bit_count = 0;
 	}
 }
 
 int	main(void)
 {
-	signal(SIGUSR1, handler1);
-	signal(SIGUSR2, handler2);
+	struct sigaction	sa1;
+	struct sigaction	sa2;
+
+	sa1.sa_handler = handler1;
+	sigemptyset(&sa1.sa_mask);
+	sa1.sa_flags = 0;
+	sa2.sa_handler = handler2;
+	sigemptyset(&sa2.sa_mask);
+	sa2.sa_flags = 0;
+	if (sigaction(SIGUSR1, &sa1, NULL) == -1 || sigaction(SIGUSR2, &sa2,
+			NULL) == -1)
+	{
+		ft_printf("Error: Failed to set signal handlers\n");
+		return (1);
+	}
 	ft_printf("Server PID: %d\n", getpid());
 	while (1)
 	{

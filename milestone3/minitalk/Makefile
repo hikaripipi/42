@@ -6,7 +6,7 @@
 #    By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/29 19:04:38 by hikarimac         #+#    #+#              #
-#    Updated: 2025/08/05 14:55:34 by hikarimac        ###   ########.fr        #
+#    Updated: 2025/08/07 17:58:56 by hikarimac        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ clean:
 	make -C $(PRINTF_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(SERVER_NAME) $(CLIENT_NAME)
 	make -C $(LIBFT_DIR) fclean
 	make -C $(PRINTF_DIR) fclean
 
