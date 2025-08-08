@@ -6,7 +6,7 @@
 #    By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/22 18:44:08 by hikarimac         #+#    #+#              #
-#    Updated: 2025/07/29 19:08:17 by hikarimac        ###   ########.fr        #
+#    Updated: 2025/08/08 20:35:03 by hikarimac        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,12 @@ PRINTF = $(PRINTF_DIR)/libftprintf.a
 MLX_DIR = include/mlx
 
 MLX = $(MLX_DIR)/libmlx.a
+
+# MLXリンクフラグ (macOS)
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+
+# インクルードパス
+CFLAGS += -I$(MLX_DIR)
 
 all: $(NAME)
 
