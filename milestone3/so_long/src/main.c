@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:39:52 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/29 17:40:02 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/15 19:19:09 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ static int	init_mlx_window(t_game *game)
 
 static int	load_and_validate_map(char *filename, t_game *game)
 {
-	int	player_pos[2];
-
+	if (!has_ber_extension(filename))
+	{
+		ft_printf("Error: Map file must have .ber extension\n");
+		return (0);
+	}
 	game->map.grid = parse_map_file(filename, &game->map.width,
 			&game->map.height);
 	if (!game->map.grid)
@@ -42,21 +45,8 @@ static int	load_and_validate_map(char *filename, t_game *game)
 		ft_printf("Error: Failed to parse map file\n");
 		return (0);
 	}
-	ft_printf("Map loaded successfully!\n");
-	ft_printf("Map dimensions: %d x %d\n", game->map.width, game->map.height);
-	if (!ft_validate_complete_map(game->map.grid, game->map.width,
-			game->map.height))
-	{
-		ft_printf("Error: Map validation failed\n");
-		free_map_array(game->map.grid, game->map.height);
+	if (!finalize_loaded_map(game))
 		return (0);
-	}
-	ft_find_player(game->map.grid, game->map.width, game->map.height,
-		player_pos);
-	game->map.player_x = player_pos[0];
-	game->map.player_y = player_pos[1];
-	ft_printf("Player initial position: (%d, %d)\n", game->map.player_x,
-		game->map.player_y);
 	return (1);
 }
 

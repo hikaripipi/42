@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 20:30:00 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/28 18:38:06 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/15 17:11:57 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,37 @@ void	cleanup_partial_allocation(char **map, int allocated_rows)
 		i++;
 	}
 	free(map);
+}
+
+char	**create_map_from_buffer(char *buffer, int bytes_read, int *width,
+		int *height)
+{
+	char	**map;
+
+	get_map_dimensions(buffer, bytes_read, width, height);
+	map = allocate_map_array(*width, *height);
+	if (!map)
+		return (NULL);
+	fill_map_from_buffer(map, buffer, bytes_read);
+	return (map);
+}
+
+int	finalize_loaded_map(t_game *game)
+{
+	int	player_pos[2];
+
+	if (!ft_validate_complete_map(game->map.grid, game->map.width,
+			game->map.height))
+	{
+		ft_printf("Error: Map validation failed\n");
+		free_map_array(game->map.grid, game->map.height);
+		return (0);
+	}
+	ft_find_player(game->map.grid, game->map.width, game->map.height,
+		player_pos);
+	game->map.player_x = player_pos[0];
+	game->map.player_y = player_pos[1];
+	return (1);
 }
 
 void	free_map_array(char **map, int allocated_rows)

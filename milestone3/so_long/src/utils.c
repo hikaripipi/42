@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 00:01:07 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/28 18:39:01 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/15 17:11:56 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,14 @@ void	ft_count_components(char **map, int width, int height, int *counts)
 		}
 		i++;
 	}
+}
+
+int	has_ber_extension(const char *filename)
+{
+	size_t	len;
+
+	len = ft_strlen(filename);
+	if (len < 4)
+		return (0);
+	return (ft_strncmp(filename + len - 4, ".ber", 4) == 0);
 }

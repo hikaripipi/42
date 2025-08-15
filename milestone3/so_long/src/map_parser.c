@@ -6,11 +6,45 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 23:02:12 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/08/08 20:41:23 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/15 17:11:54 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+static int	get_file_size_and_rewind(int fd, off_t *file_size)
+{
+	*file_size = lseek(fd, 0, SEEK_END);
+	if (*file_size < 0)
+		return (0);
+	if (lseek(fd, 0, SEEK_SET) < 0)
+		return (0);
+	return (1);
+}
+
+static char	*read_entire_file(int fd, int *bytes_read)
+{
+	off_t	file_size;
+	char	*buffer;
+
+	if (!get_file_size_and_rewind(fd, &file_size))
+		return (NULL);
+	if (file_size == 0)
+	{
+		ft_printf("Error: Empty map file\n");
+		return (NULL);
+	}
+	buffer = (char *)ft_calloc((size_t)file_size + 1, sizeof(char));
+	if (!buffer)
+		return (NULL);
+	*bytes_read = read_map_content(fd, buffer, (int)file_size);
+	if (*bytes_read < 0)
+	{
+		free(buffer);
+		return (NULL);
+	}
+	return (buffer);
+}
 
 int	ft_isvalid_pass(char **map, int width, int height)
 {
@@ -59,26 +93,20 @@ char	**parse_map_file(char *filename, int *width, int *height)
 {
 	int		fd;
 	int		bytes_read;
-	char	buffer[1000];
+	char	*buffer;
 	char	**map;
 
 	fd = open_map_file(filename);
 	if (fd < 0)
 		return (NULL);
-	bytes_read = read_map_content(fd, buffer, 999);
-	if (bytes_read < 0)
+	buffer = read_entire_file(fd, &bytes_read);
+	if (!buffer)
 	{
 		close(fd);
 		return (NULL);
 	}
-	get_map_dimensions(buffer, bytes_read, width, height);
-	map = allocate_map_array(*width, *height);
-	if (!map)
-	{
-		close(fd);
-		return (NULL);
-	}
-	fill_map_from_buffer(map, buffer, bytes_read);
+	map = create_map_from_buffer(buffer, bytes_read, width, height);
+	free(buffer);
 	close(fd);
 	return (map);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/15 16:51:26 by hikarimac         #+#    #+#             */
+/*   Updated: 2025/08/15 17:11:59 by hikarimac        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -91,10 +103,14 @@ int			ft_validate_complete_map(char **map, int width, int height);
 // map_utils.c
 void		cleanup_partial_allocation(char **map, int allocated_rows);
 void		free_map_array(char **map, int allocated_rows);
+char		**create_map_from_buffer(char *buffer, int bytes_read, int *width,
+				int *height);
+int			finalize_loaded_map(t_game *game);
 
 // utils.c
 int			ft_check_all_chars(char **map, int width, int height);
 void		ft_count_components(char **map, int width, int height, int *counts);
+int			has_ber_extension(const char *filename);
 
 // game.c
 int			init_game_images(t_game *game);
