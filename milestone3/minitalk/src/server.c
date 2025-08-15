@@ -6,13 +6,13 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 02:01:28 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/08/15 22:38:16 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/15 23:05:37 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
-static t_server_data	g_server;
+static t_server_data			g_server;
 static volatile sig_atomic_t	g_message_completed = 0;
 
 static void	flush_buffer(void)
