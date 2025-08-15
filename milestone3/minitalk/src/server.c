@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 02:01:28 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/08/07 18:00:53 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/15 22:03:14 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,45 @@
 
 static t_server_data	g_server;
 
+static void	flush_buffer(void)
+{
+	if (g_server.buffer_pos > 0)
+	{
+		/* async-signal-safe output */
+		write(1, g_server.buffer, g_server.buffer_pos);
+		g_server.buffer_pos = 0;
+	}
+}
+
+static void	push_char_to_buffer(char c)
+{
+	g_server.buffer[g_server.buffer_pos++] = c;
+	if (g_server.buffer_pos == CHUNK_SIZE)
+		flush_buffer();
+}
+
+static void	on_byte_completed(void)
+{
+	if (g_server.current_char == '\0')
+	{
+		flush_buffer();
+		write(1, "\n", 1);
+	}
+	else
+	{
+		push_char_to_buffer(g_server.current_char);
+	}
+	g_server.current_char = 0;
+	g_server.bit_count = 0;
+}
+
 void	handler1(int sig)
 {
 	(void)sig;
 	g_server.current_char = g_server.current_char << 1;
 	g_server.bit_count++;
 	if (g_server.bit_count == 8)
-	{
-		if (g_server.char_count < 999)
-		{
-			g_server.message[g_server.char_count] = g_server.current_char;
-			g_server.char_count++;
-		}
-		if (g_server.current_char == '\0')
-		{
-			print_timestamp();
-			ft_printf("Server: Received: %s\n", g_server.message);
-			g_server.char_count = 0;
-		}
-		g_server.current_char = 0;
-		g_server.bit_count = 0;
-	}
+		on_byte_completed();
 }
 
 void	handler2(int sig)
@@ -43,21 +61,7 @@ void	handler2(int sig)
 	g_server.current_char = (g_server.current_char << 1) | 1;
 	g_server.bit_count++;
 	if (g_server.bit_count == 8)
-	{
-		if (g_server.char_count < 999)
-		{
-			g_server.message[g_server.char_count] = g_server.current_char;
-			g_server.char_count++;
-		}
-		if (g_server.current_char == '\0')
-		{
-			print_timestamp();
-			ft_printf("Server: Received: %s\n", g_server.message);
-			g_server.char_count = 0;
-		}
-		g_server.current_char = 0;
-		g_server.bit_count = 0;
-	}
+		on_byte_completed();
 }
 
 int	main(void)
@@ -65,6 +69,11 @@ int	main(void)
 	struct sigaction	sa1;
 	struct sigaction	sa2;
 
+	g_server.current_char = 0;
+	g_server.bit_count = 0;
+	g_server.buffer_pos = 0;
+	g_server.message_started = 0;
+	g_server.buffer[0] = '\0';
 	sa1.sa_handler = handler1;
 	sigemptyset(&sa1.sa_mask);
 	sa1.sa_flags = 0;

@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:59:16 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/08/07 18:01:54 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/15 21:19:34 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@
 # include <sys/types.h> // pid_t
 # include <unistd.h>    // write, usleep
 
+// Chunked output buffer size
+# define CHUNK_SIZE 512
+
 typedef struct s_server_data
 {
 	char	current_char;
 	int		bit_count;
-	char	message[1000];
-	int		char_count;
+	char	buffer[CHUNK_SIZE + 1];
+	int		buffer_pos;
+	int		message_started;
 }			t_server_data;
 
 // // ===== ユーティリティ関数 =====
