@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 02:01:50 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/08/15 22:16:43 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/07 02:33:39 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	send_char(char c, int pid)
 			send_signal_with_check(pid, SIGUSR1, bmassage);
 		else
 			send_signal_with_check(pid, SIGUSR2, bmassage);
-		usleep(90);
+		usleep(1000);
 		count++;
 	}
 	free(bmassage);
@@ -67,20 +67,14 @@ void	send_char(char c, int pid)
 void	send_massage(int pid, char *massage)
 {
 	int	i;
-	int	len;
 
-	len = ft_strlen(massage);
-	ft_printf("Client: Sending %d characters...\n", len);
 	i = 0;
 	while (massage[i] != '\0')
 	{
 		send_char(massage[i], pid);
-		if ((i + 1) % 512 == 0)
-			ft_printf("Client: Sent %d/%d characters\n", i + 1, len);
 		i++;
 	}
 	send_char('\0', pid);
-	ft_printf("Client: Sending completed\n");
 }
 
 int	main(int argc, char **argv)
@@ -98,7 +92,6 @@ int	main(int argc, char **argv)
 		ft_printf("Error: Invalid PID\n");
 		return (1);
 	}
-	print_timestamp();
 	ft_printf("Client: Sending message: %s\n", argv[2]);
 	send_massage(server_pid, argv[2]);
 	return (0);
