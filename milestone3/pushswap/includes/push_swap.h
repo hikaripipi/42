@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 21:36:29 by hshinaga          #+#    #+#             */
-/*   Updated: 2025/05/12 01:32:19 by hshinaga         ###   ########.fr       */
+/*   Updated: 2025/08/15 23:42:57 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void				rotate(t_node **stack);
 void				reverse_rotate(t_node **stack);
 
 /* ========== Error & Utils ========== */
-void				error_exit(void);
+void				error_exit_cleanup(t_node **stack, char **tokens);
 int					is_valid_integer(char *str);
 void				check_duplicate(t_node *stack);
 int					ft_isdigit(int c);

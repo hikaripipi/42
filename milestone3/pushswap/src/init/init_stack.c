@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:20:14 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/12 01:35:51 by hshinaga         ###   ########.fr       */
+/*   Updated: 2025/08/15 23:42:57 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	parse_args(char **argv, t_node **stack_a)
 	{
 		tokens = ft_split(argv[i], ' ');
 		if (!tokens || !tokens[0])
-			error_exit();
+			error_exit_cleanup(stack_a, tokens);
 		parse_tokens(tokens, stack_a);
 		free_strarray(tokens);
 		i++;
@@ -70,12 +70,14 @@ void	parse_tokens(char **tokens, t_node **stack_a)
 	while (tokens[j])
 	{
 		if (!is_valid_integer(tokens[j]))
-			error_exit();
+			error_exit_cleanup(stack_a, tokens);
 		tmp_num = ft_atol(tokens[j]);
 		if (tmp_num < INT_MIN || tmp_num > INT_MAX)
-			error_exit();
+			error_exit_cleanup(stack_a, tokens);
 		num = (int)tmp_num;
 		new = create_node(num);
+		if (!new)
+			error_exit_cleanup(stack_a, tokens);
 		append_node(stack_a, new);
 		j++;
 	}

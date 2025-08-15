@@ -6,14 +6,30 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:13:08 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/05/10 23:14:27 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/15 23:48:08 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	error_exit(void)
+static void	free_tokens(char **arr)
 {
+	size_t	i;
+
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+}
+
+void	error_exit_cleanup(t_node **stack, char **tokens)
+{
+	if (tokens)
+		free_tokens(tokens);
+	if (stack && *stack)
+		free_stack(*stack);
 	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
@@ -55,7 +71,7 @@ void	check_duplicate(t_node *stack)
 		while (runner != NULL)
 		{
 			if (current->value == runner->value)
-				error_exit();
+				error_exit_cleanup(&stack, NULL);
 			runner = runner->next;
 		}
 		current = current->next;
