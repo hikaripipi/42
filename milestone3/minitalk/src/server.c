@@ -13,6 +13,7 @@
 #include "../minitalk.h"
 
 static t_server_data	g_server;
+static volatile sig_atomic_t	g_message_completed = 0;
 
 static void	flush_buffer(void)
 {
@@ -36,6 +37,7 @@ static void	on_byte_completed(void)
 	{
 		flush_buffer();
 		write(1, "\n", 1);
+		g_message_completed = 1;
 	}
 	else
 		push_char_to_buffer(g_server.current_char);
@@ -67,6 +69,14 @@ int	main(void)
 		return (ft_printf("Error: Failed to set signal handlers\n"), 1);
 	ft_printf("Server PID: %d\n", getpid());
 	while (1)
+	{
 		pause();
+		if (g_message_completed)
+		{
+			g_message_completed = 0;
+			print_timestamp();
+			ft_printf("Server: 受信完了\n");
+		}
+	}
 	return (0);
 }
