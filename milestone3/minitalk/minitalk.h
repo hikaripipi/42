@@ -6,7 +6,7 @@
 /*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:59:16 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/08/15 22:18:55 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/15 22:38:16 by hikarimac        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 
 # include "include/ft_printf/ft_printf.h"
 # include "include/libft/libft.h"
-# include <signal.h>    // sigaction, kill, etc
-# include <stdlib.h>    // malloc, free
-# include <sys/types.h> // pid_t
-# include <unistd.h>    // write, usleep
+# include <signal.h>
+# include <stdlib.h>
+# include <sys/types.h>
+# include <unistd.h>
 
-// Chunked output buffer size
 # define CHUNK_SIZE 512
 
 typedef struct s_server_data
@@ -29,21 +28,8 @@ typedef struct s_server_data
 	int		bit_count;
 	char	buffer[CHUNK_SIZE + 1];
 	int		buffer_pos;
-	int		message_started;
 }			t_server_data;
 
-// // ===== ユーティリティ関数 =====
-// void	ft_putchar(char c);
-// void	ft_putstr(const char *s);
-// int		ft_atoi(const char *str);
-// int		ft_strlen(const char *str);
 void		print_timestamp(void);
-
-// // ===== クライアント側 =====
-// void	send_char(pid_t server_pid, char c);
-// void	send_str(pid_t server_pid, const char *str);
-
-// // ===== サーバー側 =====
-// void	handle_signal(int sig, siginfo_t *info, void *context);
 
 #endif
