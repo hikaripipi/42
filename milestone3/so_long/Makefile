@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+         #
+#    By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/22 18:44:08 by hikarimac         #+#    #+#              #
-#    Updated: 2025/08/08 20:35:03 by hikarimac        ###   ########.fr        #
+#    Updated: 2025/08/22 17:02:55 by hshinaga         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ MLX_DIR = include/mlx
 MLX = $(MLX_DIR)/libmlx.a
 
 # MLXリンクフラグ (macOS)
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 # インクルードパス
 CFLAGS += -I$(MLX_DIR)

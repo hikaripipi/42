@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_events.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 17:15:00 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/28 18:37:21 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/22 18:00:01 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ int	handle_keypress(int keycode, t_game *game)
 	ft_printf("Key pressed: %d\n", keycode);
 	if (keycode == 53)
 		close_game(game);
-	if (keycode == 13)
+	if (keycode == 119)
 		player_move_up(game);
-	else if (keycode == 1)
+	else if (keycode == 115)
 		player_move_down(game);
-	else if (keycode == 0)
+	else if (keycode == 97)
 		player_move_left(game);
-	else if (keycode == 2)
+	else if (keycode == 100)
 		player_move_right(game);
 	return (0);
 }
