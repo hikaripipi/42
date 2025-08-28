@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 20:30:00 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/08/15 17:11:57 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/28 17:42:30 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	**create_map_from_buffer(char *buffer, int bytes_read, int *width,
 int	finalize_loaded_map(t_game *game)
 {
 	int	player_pos[2];
+	int	counts[3];
 
 	if (!ft_validate_complete_map(game->map.grid, game->map.width,
 			game->map.height))
@@ -53,6 +54,9 @@ int	finalize_loaded_map(t_game *game)
 		player_pos);
 	game->map.player_x = player_pos[0];
 	game->map.player_y = player_pos[1];
+	ft_count_components(game->map.grid, game->map.width, game->map.height,
+		counts);
+	game->map.collectibles = counts[1];
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 17:39:44 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/29 17:39:48 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/28 19:41:30 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ void	cleanup_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->tiles.player_img);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
 	if (game->map.grid)
 		free_map_array(game->map.grid, game->map.height);
 }

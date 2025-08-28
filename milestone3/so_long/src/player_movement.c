@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:38:26 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/28 18:38:32 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/28 17:42:55 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	handle_collectible(t_game *game, int new_x, int new_y)
 {
 	ft_printf("Collectible found!\n");
 	game->map.grid[new_y][new_x] = EMPTY;
+	game->map.collectibles--;
 }
 
 static void	handle_exit(t_game *game)

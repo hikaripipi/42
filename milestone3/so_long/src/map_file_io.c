@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_file_io.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 17:37:58 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/08/08 21:00:27 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/28 19:41:42 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,33 @@ void	get_map_dimensions(char *buffer, int size, int *width, int *height)
 {
 	int	i;
 
-	*height = 1;
+	*height = 0;
+	*width = 0;
 	i = 0;
-	while (i < size)
+	
+	// 高さを計算（改行の数 + 1）
+	while (i < size && buffer[i])
 	{
 		if (buffer[i] == '\n')
 			(*height)++;
 		i++;
 	}
-	*width = 0;
+	if (i > 0 && buffer[i - 1] != '\n')
+		(*height)++;
+	
+	// 幅を計算（最初の行の文字数）
 	i = 0;
-	while (i < size && buffer[i] != '\n')
+	while (i < size && buffer[i] && buffer[i] != '\n')
 	{
 		(*width)++;
 		i++;
+	}
+	
+	// 安全性チェック
+	if (*width <= 0 || *height <= 0)
+	{
+		*width = 0;
+		*height = 0;
 	}
 }
 
@@ -88,24 +101,40 @@ void	fill_map_from_buffer(char **map, char *buffer, int size)
 	int	i;
 	int	row;
 	int	col;
+	int	width;
 
 	i = 0;
 	row = 0;
 	col = 0;
-	while (i < size)
+	width = 0;
+	// 最初の行の幅を取得
+	while (i < size && buffer[i] != '\n')
+	{
+		width++;
+		i++;
+	}
+	i = 0;
+	row = 0;
+	col = 0;
+	while (i < size && buffer[i])
 	{
 		if (buffer[i] == '\n')
 		{
-			map[row][col] = '\0';
+			if (col < width)
+				map[row][col] = '\0';
 			row++;
 			col = 0;
 		}
 		else
 		{
-			map[row][col] = buffer[i];
-			col++;
+			if (col < width)
+			{
+				map[row][col] = buffer[i];
+				col++;
+			}
 		}
 		i++;
 	}
-	map[row][col] = '\0';
+	if (row < 100 && col < width)  // 安全な境界内であることを確認
+		map[row][col] = '\0';
 }

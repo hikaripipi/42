@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_pathfinding.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikarimac <hikarimac@student.42.fr>        +#+  +:+       +#+        */
+/*   By: hshinaga <hshinaga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 20:30:00 by hikarimac         #+#    #+#             */
-/*   Updated: 2025/07/28 18:38:00 by hikarimac        ###   ########.fr       */
+/*   Updated: 2025/08/28 17:41:54 by hshinaga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ int	**ft_create_visited(int width, int height)
 		visited[i] = (int *)ft_calloc(width, sizeof(int));
 		if (!visited[i])
 		{
+			while (--i >= 0)
+				free(visited[i]);
+			free(visited);
 			return (NULL);
 		}
 		i++;
